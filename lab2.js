@@ -50,6 +50,23 @@ function assert(expression, failureMessage) {
  with Dowington.
 */
 
+function Blob() {
+
+}
+
+var blob = new Blob;
+
+(function dowingtonConsumption() {
+  var citizensOfDowington = 1000;
+  var hourCounter = 0;
+  while (citizensOfDowington > 0) {
+    hourCounter++;
+    citizensOfDowington = citizensOfDowington - hourCounter;
+  }
+  console.log("dowingtonConsumption complete, hours = " + hourCounter);
+  hoursSpentInDowington = hourCounter;
+})();
+
 var hoursSpentInDowington; // TODO: assign me the value of the
                            // above calculation (how long it took
                            // the blob to eat Dowington)
@@ -58,9 +75,18 @@ var hoursSpentInDowington; // TODO: assign me the value of the
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-function hoursToOoze(population, peoplePerHour) {
+Blob.prototype.hoursToOoze = function (population, peoplePerHour) {
   // TODO: implement me based on the instructions above.
   // Be sure to then assign me to the Blob's prototype.
+  var numberOfCitizens = population;
+  var consumptionRate = peoplePerHour;
+  var hourCounter = 0;
+  while (numberOfCitizens > 0) {
+    hourCounter++;
+    numberOfCitizens = numberOfCitizens - (hourCounter * consumptionRate);
+  }
+  console.log("hoursToOoze complete, hours = " + hourCounter);
+  return hourCounter;
 }
 
 assert(blob.hoursToOoze(0, 1) === 0, 'no people means no time needed.');
@@ -69,6 +95,10 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
 
 // TODO: write three more assertions like the two above, testing out
 // the hoursToOoze method.
+
+assert(blob.hoursToOoze(2000, 5) === 28, 'Population 2000, Consumption Rate 5 should equal 28');
+assert(blob.hoursToOoze(5000, 2) === 71, 'Population 5000, Consumption Rate 2 should equal 71');
+
 
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
