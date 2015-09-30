@@ -16,3 +16,22 @@ comments. Be sure to read everything. Run lab2.js with `node lab2.js`.
 
 
 #### Resources and Collaborators
+
+Object constructor
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor
+
+Function declarations
+http://www.w3schools.com/js/js_function_definition.asp
+
+dot notation vs. bracket notation
+http://stackoverflow.com/questions/17189642/difference-between-using-bracket-and-dot-notation
+
+sort - compare ASCII characters
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+forEach() method
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+
+
+
+

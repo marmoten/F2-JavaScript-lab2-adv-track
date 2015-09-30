@@ -216,16 +216,33 @@ assert(vegetableArray.join() === 'turnip,cucumber,asparagus,carrot', 'cucumber s
 function sumArray(numberArray) {
   var sum = 0;
   // TODO: implement me using forEach
+  numberArray.forEach(function(x){
+    sum = sum + x;
+  });
   return sum;
 }
 
+assert(sumArray([1, 5, 2, 45]) === 53, 'sum should equal 53');
+assert(sumArray([5, 54, 124, 555]) === 738, 'sum should equal 738');
+
 function sumSort(arrayOfArrays) {
-  arrayOfArrays.sort(function(item) {
+  arrayOfArrays.sort(function(a, b) {
     // TODO: implement me using sumArray
     //  order the arrays based on the sum of the numbers
     //  inside each array
+    return (sumArray(a) - sumArray(b));
   });
 }
+
+var numberArraysOne = [[1,66,32,543],[3,1,5],[56,34,23]];
+var numberArraysTwo = [[5,434,5533,54],[542,7899,43,2],[5,7,5]];
+sumSort(numberArraysOne);
+sumSort(numberArraysTwo);
+
+
+assert(numberArraysOne[0].join() === '3,1,5', 'first array should be [3,1,5]');
+assert(numberArraysTwo[0].join() === '5,7,5', 'first array should be [3,1,5]');
+
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
