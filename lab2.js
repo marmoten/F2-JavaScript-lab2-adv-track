@@ -50,6 +50,23 @@ function assert(expression, failureMessage) {
  with Dowington.
 */
 
+function Blob() {
+
+}
+
+var blob = new Blob();
+
+(function dowingtonConsumption() {
+  var citizensOfDowington = 1000;
+  var hourCounter = 0;
+  while (citizensOfDowington > 0) {
+    hourCounter++;
+    citizensOfDowington = citizensOfDowington - hourCounter;
+  }
+  console.log('dowingtonConsumption complete, hours = ' + hourCounter);
+  hoursSpentInDowington = hourCounter;
+})();
+
 var hoursSpentInDowington; // TODO: assign me the value of the
                            // above calculation (how long it took
                            // the blob to eat Dowington)
@@ -58,10 +75,19 @@ var hoursSpentInDowington; // TODO: assign me the value of the
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-function hoursToOoze(population, peoplePerHour) {
+Blob.prototype.hoursToOoze = function(population, peoplePerHour) {
   // TODO: implement me based on the instructions above.
   // Be sure to then assign me to the Blob's prototype.
-}
+  var numberOfCitizens = population;
+  var consumptionRate = peoplePerHour;
+  var hourCounter = 0;
+  while (numberOfCitizens > 0) {
+    hourCounter++;
+    numberOfCitizens = numberOfCitizens - (hourCounter * consumptionRate);
+  }
+  console.log('hoursToOoze complete, hours = ' + hourCounter);
+  return hourCounter;
+};
 
 assert(blob.hoursToOoze(0, 1) === 0, 'no people means no time needed.');
 assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
@@ -69,6 +95,9 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
 
 // TODO: write three more assertions like the two above, testing out
 // the hoursToOoze method.
+
+assert(blob.hoursToOoze(2000, 5) === 28, 'Population 2000, Consumption Rate 5 should equal 28');
+assert(blob.hoursToOoze(5000, 2) === 71, 'Population 5000, Consumption Rate 2 should equal 71');
 
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
@@ -85,13 +114,15 @@ var hello = {
 // speak, and method (that you'll place on the prototype) called
 // sayHello.
 
-function SentientBeing () {
+function SentientBeing() {
   // TODO: specify a home planet and a language
   // you'll need to add parameters to this constructor
+  this.homePlanet = null;
+  this.homeLanguage = null;
 }
 
 // sb is a SentientBeing object
-function sayHello (sb) {
+SentientBeing.prototype.sayHello = function(sb) {
     // TODO: say hello prints out (console.log's) hello in the
     // language of the speaker, but returns it in the language
     // of the listener (the sb parameter above).
@@ -99,16 +130,52 @@ function sayHello (sb) {
     // to do the translating
 
     //TODO: put this on the SentientBeing prototype
-  }
+    console.log(this.homeLanguageHello);
+    return sb.homeLanguageHello;
+    //console.log(hello.languageHello);
+
+    //TODO: put this on the SentientBeing prototype
+  };
 
 // TODO: create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
+
+function Klingon() {
+  this.homeLanguage = 'klingon';
+  this.homePlanet = 'Qo\'noS';
+  this.homeLanguageHello = hello.klingon;
+}
+function Romulan() {
+  this.homeLanguage = 'romulan';
+  this.homePlanet = 'Romulus';
+  this.homeLanguageHello = hello.romulan;
+}
+function Human() {
+  this.homeLanguage = 'federation standard';
+  this.homePlanet = 'Earth';
+  this.homeLanguageHello = hello['federation standard'];
+}
+
+Klingon.prototype = new SentientBeing();
+Romulan.prototype = new SentientBeing();
+Human.prototype = new SentientBeing();
 
 assert((new Human()).sayHello(new Klingon()) === 'nuqneH',
   'the klingon should hear nuqneH');
 
 // TODO: write five more assertions, to complete all the possible
 // greetings between the three types of sentient beings you created above.
+
+assert((new Human()).sayHello(new Romulan()) === 'Jolan\'tru',
+  'the romulan should hear Jolan\'tru');
+assert((new Romulan()).sayHello(new Klingon()) === 'nuqneH',
+  'the klingon should hear nuqneH');
+assert((new Romulan()).sayHello(new Human()) === 'hello',
+  'the human should hear hello');
+assert((new Klingon()).sayHello(new Romulan()) === 'Jolan\'tru',
+  'the romulan should hear Jolan\'tru');
+assert((new Klingon()).sayHello(new Human()) === 'hello',
+  'the human should hear hello');
 
 //*********************************************************
 // PROBLEM 3: Sorting. 20 points.
@@ -127,23 +194,50 @@ function lastLetterSort(stringArray) {
     // this byLastLetter function is a "compare function"
     // And check out the "comparing strings" section  here:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+    var aLastLetter = a[(a.length - 1)];
+    var bLastLetter = b[(b.length - 1)];
+    return aLastLetter.localeCompare(bLastLetter);
   }
   stringArray.sort(byLastLetter);
 }
 
+var colorArray = ['red', 'black', 'brown', 'purple'];
+var vegetableArray = ['turnip', 'asparagus', 'carrot', 'cucumber'];
+
+lastLetterSort(colorArray);
+lastLetterSort(vegetableArray);
+
+assert(colorArray.join() === 'red,purple,black,brown', 'purple should be in the 2nd spot');
+assert(vegetableArray.join() === 'turnip,cucumber,asparagus,carrot', 'cucumber should be in the 2nd spot, and carrot should be 4th');
+
 function sumArray(numberArray) {
   var sum = 0;
   // TODO: implement me using forEach
+  numberArray.forEach(function(x) {
+    sum = sum + x;
+  });
   return sum;
 }
 
+assert(sumArray([1, 5, 2, 45]) === 53, 'sum should equal 53');
+assert(sumArray([5, 54, 124, 555]) === 738, 'sum should equal 738');
+
 function sumSort(arrayOfArrays) {
-  arrayOfArrays.sort(function(item) {
+  arrayOfArrays.sort(function(a, b) {
     // TODO: implement me using sumArray
     //  order the arrays based on the sum of the numbers
     //  inside each array
+    return (sumArray(a) - sumArray(b));
   });
 }
+
+var numberArraysOne = [[1, 66, 32, 543], [3, 1, 5], [56, 34, 23]];
+var numberArraysTwo = [[5, 434, 5533, 54], [542, 7899, 43, 2], [5, 7, 5]];
+sumSort(numberArraysOne);
+sumSort(numberArraysTwo);
+
+assert(numberArraysOne[0].join() === '3,1,5', 'first array should be [3,1,5]');
+assert(numberArraysTwo[0].join() === '5,7,5', 'first array should be [3,1,5]');
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
