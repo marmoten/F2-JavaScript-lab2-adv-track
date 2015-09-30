@@ -196,8 +196,8 @@ function lastLetterSort(stringArray) {
     // this byLastLetter function is a "compare function"
     // And check out the "comparing strings" section  here:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
-    aLastLetter = a[(a.length - 1)];
-    bLastLetter = b[(b.length - 1)];
+    var aLastLetter = a[(a.length - 1)];
+    var bLastLetter = b[(b.length - 1)];
     return aLastLetter.localeCompare(bLastLetter);
   }
   stringArray.sort(byLastLetter);
