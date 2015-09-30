@@ -54,7 +54,7 @@ function Blob() {
 
 }
 
-var blob = new Blob;
+var blob = new Blob();
 
 (function dowingtonConsumption() {
   var citizensOfDowington = 1000;
@@ -63,7 +63,7 @@ var blob = new Blob;
     hourCounter++;
     citizensOfDowington = citizensOfDowington - hourCounter;
   }
-  console.log("dowingtonConsumption complete, hours = " + hourCounter);
+  console.log('dowingtonConsumption complete, hours = ' + hourCounter);
   hoursSpentInDowington = hourCounter;
 })();
 
@@ -75,7 +75,7 @@ var hoursSpentInDowington; // TODO: assign me the value of the
 // town, and the starting consumption rate, and returns the number
 // of hours the blob needs to ooze its way through that town.
 
-Blob.prototype.hoursToOoze = function (population, peoplePerHour) {
+Blob.prototype.hoursToOoze = function(population, peoplePerHour) {
   // TODO: implement me based on the instructions above.
   // Be sure to then assign me to the Blob's prototype.
   var numberOfCitizens = population;
@@ -85,9 +85,9 @@ Blob.prototype.hoursToOoze = function (population, peoplePerHour) {
     hourCounter++;
     numberOfCitizens = numberOfCitizens - (hourCounter * consumptionRate);
   }
-  console.log("hoursToOoze complete, hours = " + hourCounter);
+  console.log('hoursToOoze complete, hours = ' + hourCounter);
   return hourCounter;
-}
+};
 
 assert(blob.hoursToOoze(0, 1) === 0, 'no people means no time needed.');
 assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
@@ -98,7 +98,6 @@ assert(blob.hoursToOoze(1000, 1) === hoursSpentInDowington,
 
 assert(blob.hoursToOoze(2000, 5) === 28, 'Population 2000, Consumption Rate 5 should equal 28');
 assert(blob.hoursToOoze(5000, 2) === 71, 'Population 5000, Consumption Rate 2 should equal 71');
-
 
 //*********************************************************
 // PROBLEM 2: Universal Translator. 20 points
@@ -115,7 +114,7 @@ var hello = {
 // speak, and method (that you'll place on the prototype) called
 // sayHello.
 
-function SentientBeing () {
+function SentientBeing() {
   // TODO: specify a home planet and a language
   // you'll need to add parameters to this constructor
   this.homePlanet = null;
@@ -164,7 +163,6 @@ Human.prototype = new SentientBeing();
 assert((new Human()).sayHello(new Klingon()) === 'nuqneH',
   'the klingon should hear nuqneH');
 
-
 // TODO: write five more assertions, to complete all the possible
 // greetings between the three types of sentient beings you created above.
 
@@ -203,8 +201,8 @@ function lastLetterSort(stringArray) {
   stringArray.sort(byLastLetter);
 }
 
-var colorArray = ["red", "black", "brown", "purple"];
-var vegetableArray = ["turnip", "asparagus", "carrot", "cucumber"];
+var colorArray = ['red', 'black', 'brown', 'purple'];
+var vegetableArray = ['turnip', 'asparagus', 'carrot', 'cucumber'];
 
 lastLetterSort(colorArray);
 lastLetterSort(vegetableArray);
@@ -212,11 +210,10 @@ lastLetterSort(vegetableArray);
 assert(colorArray.join() === 'red,purple,black,brown', 'purple should be in the 2nd spot');
 assert(vegetableArray.join() === 'turnip,cucumber,asparagus,carrot', 'cucumber should be in the 2nd spot, and carrot should be 4th');
 
-
 function sumArray(numberArray) {
   var sum = 0;
   // TODO: implement me using forEach
-  numberArray.forEach(function(x){
+  numberArray.forEach(function(x) {
     sum = sum + x;
   });
   return sum;
@@ -234,15 +231,13 @@ function sumSort(arrayOfArrays) {
   });
 }
 
-var numberArraysOne = [[1,66,32,543],[3,1,5],[56,34,23]];
-var numberArraysTwo = [[5,434,5533,54],[542,7899,43,2],[5,7,5]];
+var numberArraysOne = [[1, 66, 32, 543], [3, 1, 5], [56, 34, 23]];
+var numberArraysTwo = [[5, 434, 5533, 54], [542, 7899, 43, 2], [5, 7, 5]];
 sumSort(numberArraysOne);
 sumSort(numberArraysTwo);
 
-
 assert(numberArraysOne[0].join() === '3,1,5', 'first array should be [3,1,5]');
 assert(numberArraysTwo[0].join() === '5,7,5', 'first array should be [3,1,5]');
-
 
 //*********************************************************
 // PROBLEM 4: Cleanup: 10 points
